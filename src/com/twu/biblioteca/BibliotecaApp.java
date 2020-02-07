@@ -20,21 +20,26 @@ public class BibliotecaApp {
         System.out.println("Menu: ");
 
         System.out.println("1 - List of Books");
+        System.out.println("0 - Exit");
 
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Please select an option");
 
-        int option = scanner.nextInt();  // Read user input
-        System.out.println("Option: " + option);
-
-        switch(option) {
-            case 1:
-                displayBooks(books);
-                break;
-            default:
-                exit(0);
+        while (true) {
+            System.out.println("Please select an option");
+            int option = scanner.nextInt();  // Read user input
+            System.out.println("Option: " + option);
+            switch(option) {
+                case 1:
+                    displayBooks(books);
+                    break;
+                case 0:
+                    exit(0);
+                    break;
+                default:
+                    System.out.println("Please select a valid option!");
+                    break;
+            }
         }
-
     }
 
     private static void displayBooks(ArrayList<Book> books) {
