@@ -1,6 +1,9 @@
 package com.twu.biblioteca;
 
 import java.util.ArrayList;
+import java.util.Scanner;
+
+import static java.lang.System.exit;
 
 public class BibliotecaApp {
 
@@ -11,11 +14,33 @@ public class BibliotecaApp {
         System.out.println();
 
         ArrayList<Book> books = new ArrayList<Book>();
-
         populateBooks(books);
 
-        for (int i = 0; i < books.size(); i++) {
-            System.out.println(books.get(i));
+//        list out menu options
+        System.out.println("Menu: ");
+
+        System.out.println("1 - List of Books");
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Please select an option");
+
+        int option = scanner.nextInt();  // Read user input
+        System.out.println("Option: " + option);
+
+        switch(option) {
+            case 1:
+                displayBooks(books);
+                break;
+            default:
+                exit(0);
+        }
+
+    }
+
+    private static void displayBooks(ArrayList<Book> books) {
+
+        for (Book book : books) {
+            System.out.println(book);
         }
     }
 
@@ -32,4 +57,8 @@ public class BibliotecaApp {
         Book wizardOfOz = new Book("The Wonderful Wizard of Oz", "L. Frank Baum", 1900);
         books.add(wizardOfOz);
     }
+
+//    private static void printMenu(ArrayList<String> menu) {
+//
+//    }
 }
