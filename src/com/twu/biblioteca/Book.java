@@ -40,7 +40,12 @@ public class Book {
         this.year = year;
     }
 
-
+    @Override
+    public String toString() {
+        return ("Book: "+ this.getName() + ", " +
+                " Author: "+ this.getAuthor() + ", " +
+                " Year: " + this.getYear());
+    }
 
 }
 
