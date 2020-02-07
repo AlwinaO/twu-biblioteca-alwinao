@@ -6,6 +6,8 @@ public class Book {
     private String name;
     private String author;
     private int year;
+//    add boolean value to check if book is available
+    private boolean available;
 
     public Book() {
     }
@@ -14,6 +16,7 @@ public class Book {
         this.name = name;
         this.author = author;
         this.year = year;
+        this.available = true;
     }
 
     public String getName() {
@@ -38,6 +41,14 @@ public class Book {
 
     public void setYear(int year) {
         this.year = year;
+    }
+
+    public void checkout() {
+        this.available = false;
+    }
+
+    public boolean isAvailable() {
+        return available;
     }
 
     @Override
