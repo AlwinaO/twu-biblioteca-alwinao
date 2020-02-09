@@ -95,9 +95,14 @@ public class BibliotecaApp {
 
     public void checkoutBook(String name) {
         for (Book book : books) {
-            if(book.getName().equals(name)){
-            System.out.println("Checking out: " + book.getName());
-            book.checkout();
+            if(book.getName().equalsIgnoreCase(name) && book.isAvailable()){
+                System.out.println("Checking out: " + book.getName());
+                book.checkout();
+                System.out.println("Thank you! Enjoy the book.");
+            }
+            else if (book.getName().equals(name) && !book.isAvailable()){
+                System.out.println("Sorry " + book.getName() +" is not available.");
+
             }
         }
     }
