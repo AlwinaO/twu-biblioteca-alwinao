@@ -24,6 +24,7 @@ public class BibliotecaApp {
 
         System.out.println("1 - List of Books");
         System.out.println("2 - Check out a book");
+        System.out.println("3 - Check in a book");
         System.out.println("0 - Exit");
 
         Scanner scanner = new Scanner(System.in);
@@ -39,6 +40,9 @@ public class BibliotecaApp {
                 case 2:
                     app.enterTitle();
                     break;
+                case 3:
+                    app.checkinBook();
+                    break;
                 case 0:
                     exit(0);
                     break;
@@ -50,8 +54,6 @@ public class BibliotecaApp {
     }
 
     public void displayBooks() {
-
-
         for (Book book : getAvailableBooks()) {
             System.out.println(book);
         }
@@ -83,14 +85,11 @@ public class BibliotecaApp {
     }
 
     public void enterTitle() {
-//        check if book is in list, if yes, then remove, else provide error
-        
         System.out.println("Please enter name of book to check out a book");
         Scanner scanner = new Scanner(System.in);
         String  name = scanner.nextLine();
 
         checkoutBook(name);
-
     }
 
     public void checkoutBook(String name) {
@@ -106,4 +105,31 @@ public class BibliotecaApp {
             }
         }
     }
+
+    public void checkinBook() {
+        for (Book book : books) {
+            System.out.println("What book would you like to return? ");
+            Scanner scanner = new Scanner(System.in);
+            String  name = scanner.nextLine();
+
+            if (book.getName().equalsIgnoreCase(name) && !book.isAvailable())
+                System.out.println("Checking in: " + book.getName());
+                book.checkin();
+//                System.out.println("Thank you for returning the book.");
+//            else if (book.getName().equals(name) && !book.isAvailable()){
+//                System.out.println("Sorry " + book.getName() +" is not available.");
+//
+//            }
+        }
+    }
+
+    public void addBook() {
+
+    }
 }
+
+//if(book.getName().equalsIgnoreCase(name) && !book.isAvailable()){
+//        System.out.println("Checking in: " + book.getName());
+//        book.checkin();
+//        System.out.println("Thank you for returning the book.");
+//        }
