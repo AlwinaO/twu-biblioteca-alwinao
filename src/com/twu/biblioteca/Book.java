@@ -51,6 +51,10 @@ public class Book {
         return available;
     }
 
+    public void checkin() {
+        this.available = true;
+    }
+
     @Override
     public String toString() {
         return ("Book: "+ this.getName() + ", " +
