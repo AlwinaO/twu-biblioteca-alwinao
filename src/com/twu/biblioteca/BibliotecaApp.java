@@ -9,6 +9,7 @@ public class BibliotecaApp {
 
     ArrayList<Book> books = new ArrayList<Book>();
     ArrayList<Movie> movies = new ArrayList<Movie>();
+    ArrayList<User> users = new ArrayList<User>();
 
 
     public static void main(String[] args) {
@@ -116,6 +117,7 @@ public class BibliotecaApp {
         System.out.println("Sorry " + name + " is not available.");
     }
 
+//  can throw an exception
     public void checkinBook(String name) {
         for (Book book : books) {
             if (book.getName().equalsIgnoreCase(name) && !book.isAvailable()) {
@@ -157,6 +159,15 @@ public class BibliotecaApp {
 
         Movie blackPanther = new Movie("Black Panther", 2018, "Ryan Coogler", "9");
         movies.add(blackPanther);
+    }
+
+    public void populateUsers() {
+        users.add(new User("343-5421", "itsmemolly", "Molly", "molly@email.com", "213-234-9876", false));
+        users.add(new User("786-9032", "librarian23", "Issa", "issa@biblioteca.com", "213-234-8765", true));
+        users.add(new User("876-1029", "my1stpsword", "Kelly", "kelly@email.com", "213-234-2390", false));
+        users.add(new User("387-2903", "password2day", "Tiffany", "tiffany@email.com", "213-234-2109", false));
+        users.add(new User("587-1209", "nvrchangeit", "Daniel", "daniel@bibilioteca.com", "213-234-7834", true));
+        users.add(new User("438-9874", "123pw456", "Lawrence", "lawrence@email.com", "213-234-2459", false));
     }
 
     public void checkoutMovie(String name) {
