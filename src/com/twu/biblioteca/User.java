@@ -15,7 +15,7 @@ public class User {
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
-        this.librarian = false;
+        this.librarian = librarian;
     }
 
     public String getLibraryNumber() {
