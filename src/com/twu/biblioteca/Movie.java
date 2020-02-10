@@ -13,6 +13,7 @@ public class Movie extends Item{
         this.available = true;
     }
 
+    //    Don't need setters unless using it somewhere
     public String getName() {
         return name;
     }

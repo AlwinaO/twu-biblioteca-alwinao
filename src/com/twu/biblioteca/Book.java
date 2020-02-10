@@ -5,10 +5,6 @@ public class Book extends Item{
 
     private String author;
 
-
-    public Book() {
-    }
-
     public Book(String name, String author, int year) {
         this.name = name;
         this.author = author;
@@ -16,6 +12,7 @@ public class Book extends Item{
         this.available = true;
     }
 
+//    Don't need setters unless using it somewhere
     public String getName() {
         return name;
     }
