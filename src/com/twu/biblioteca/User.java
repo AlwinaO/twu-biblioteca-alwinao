@@ -42,11 +42,10 @@ public class User {
         return librarian;
     }
 
-//    @Override
-//    public String toString() {
-//        return ("Movie: "+ this.getName() + " | " +
-//                " Director: "+ this.getDirector() + " | " +
-//                " Year: " + this.getYear()) + " | " +
-//                " Rating: " + this.getRating();
-//    }
+    @Override
+    public String toString() {
+        return ("Name: "+ this.getName() + " | " +
+                " Email: "+ this.getEmail() + " | " +
+                " Phone Number: " + this.getPhoneNumber());
+    }
 }
