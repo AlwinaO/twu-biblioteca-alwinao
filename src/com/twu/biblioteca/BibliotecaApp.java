@@ -1,6 +1,7 @@
 package com.twu.biblioteca;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 import static java.lang.System.exit;
@@ -11,6 +12,7 @@ public class BibliotecaApp {
     ArrayList<Book> books = new ArrayList<Book>();
     ArrayList<Movie> movies = new ArrayList<Movie>();
     ArrayList<User> users = new ArrayList<User>();
+    HashMap<String, User> checkedOutItems = new HashMap<String, User>();
 
     User currentUser = null;
     Scanner scanner = new Scanner(System.in);
@@ -40,7 +42,7 @@ public class BibliotecaApp {
 //        list out menu options
         System.out.println("Menu: ");
 
-        app.displayMenu();
+        app.displayMenu(app.currentUser.isLibrarian());
 
         app.inputForMenu();
 
@@ -105,7 +107,8 @@ public class BibliotecaApp {
 
     public String enterTitle() {
         System.out.println("Please enter name of item to checkin or checkout.");
-        return scanner.nextLine();
+        Scanner titleScanner = new Scanner(System.in);
+        return titleScanner.nextLine();
     }
 
     public void checkoutBook(String name) {
@@ -113,6 +116,7 @@ public class BibliotecaApp {
             if (book.getName().equalsIgnoreCase(name) && book.isAvailable()) {
                 System.out.println("Checking out: " + book.getName());
                 book.checkout();
+                checkedOutItems.put(book.getName(), currentUser);
                 System.out.println("Thank you! Enjoy the book.");
                 return;
             }
@@ -126,6 +130,7 @@ public class BibliotecaApp {
             if (book.getName().equalsIgnoreCase(name) && !book.isAvailable()) {
                 System.out.println("Checking in: " + book.getName());
                 book.checkin();
+                checkedOutItems.remove(book.getName(), currentUser);
                 System.out.println("Thank you for returning the book.");
                 return;
             }
@@ -169,6 +174,7 @@ public class BibliotecaApp {
             if (movie.getName().equalsIgnoreCase(name) && movie.isAvailable()) {
                 System.out.println("Checking out: " + movie.getName());
                 movie.checkout();
+                checkedOutItems.put(movie.getName(), currentUser);
                 System.out.println("Thank you! Enjoy the movie.");
                 return;
             }
@@ -181,6 +187,7 @@ public class BibliotecaApp {
             if (movie.getName().equalsIgnoreCase(name) && !movie.isAvailable()) {
                 System.out.println("Checking in: " + movie.getName());
                 movie.checkin();
+                checkedOutItems.remove(movie.getName(), currentUser);
                 System.out.println("Thank you for returning the movie.");
                 return;
             }
@@ -188,7 +195,14 @@ public class BibliotecaApp {
         System.out.println("That is not a valid movie to return.");
     }
 
-    public void displayMenu(){
+    public void getAvailableItems() {
+
+        for (String i : checkedOutItems.keySet()) {
+            System.out.println("Library Number: " + checkedOutItems.get(i).getLibraryNumber() + " Item Name: " + i);
+        }
+    }
+
+    public void displayMenu(boolean isLibrarian){
         System.out.println("1 - List of Books");
         System.out.println("2 - Check out a book");
         System.out.println("3 - Check in a book");
@@ -196,6 +210,9 @@ public class BibliotecaApp {
         System.out.println("5 - Check out a movie");
         System.out.println("6 - Check in a movie");
         System.out.println("7 - View your information");
+        if (isLibrarian) {
+            System.out.println("8 - View checked out books");
+        }
         System.out.println("0 - Exit");
         System.out.println();
     }
@@ -231,6 +248,9 @@ public class BibliotecaApp {
                     break;
                 case 7:
                     app.viewInfo();
+                    break;
+                case 8:
+                    app.getAvailableItems();
                     break;
                 case 0:
                     exit(0);
