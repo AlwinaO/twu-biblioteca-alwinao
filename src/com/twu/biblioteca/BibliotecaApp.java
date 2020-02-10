@@ -12,6 +12,9 @@ public class BibliotecaApp {
     ArrayList<Movie> movies = new ArrayList<Movie>();
     ArrayList<User> users = new ArrayList<User>();
 
+    User currentUser = null;
+    Scanner scanner = new Scanner(System.in);
+
     public static void main(String[] args) {
 
         System.out.println("Welcome to Biblioteca. Your one-stop shop for great book titles in Bangalore!");
@@ -22,7 +25,17 @@ public class BibliotecaApp {
         app.populateMovies();
         app.populateUsers();
 
+        System.out.println("Please enter your library number: ");
+        String libraryNumber = app.scanner.nextLine();
 
+        System.out.println("Please enter your password: ");
+        String password = app.scanner.nextLine();
+
+        try {
+            app.setCurrentUser(app.getUser(libraryNumber, password));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 //        list out menu options
         System.out.println("Menu: ");
@@ -31,6 +44,32 @@ public class BibliotecaApp {
 
         app.inputForMenu();
 
+    }
+
+    public User getUser(String libraryNumber, String password) throws Exception {
+        for (User user : users) {
+            if (user.getLibraryNumber().equals(libraryNumber) && user.getPassword().equals(password)) {
+                return user;
+            }
+        }
+        throw new Exception("User not found. Please re-enter library number and password.");
+    }
+
+    public void setCurrentUser(User user) {
+        this.currentUser = user;
+    }
+
+    public void viewInfo() {
+        System.out.println(app.currentUser.getInfo());
+    }
+
+    public void populateUsers() {
+        users.add(new User("343-5421", "itsmemolly", "Molly", "molly@email.com", "213-234-9876", false));
+        users.add(new User("786-9032", "librarian23", "Issa", "issa@biblioteca.com", "213-234-8765", true));
+        users.add(new User("876-1029", "my1stpsword", "Kelly", "kelly@email.com", "213-234-2390", false));
+        users.add(new User("387-2903", "password2day", "Tiffany", "tiffany@email.com", "213-234-2109", false));
+        users.add(new User("587-1209", "nvrchangeit", "Daniel", "daniel@bibilioteca.com", "213-234-7834", true));
+        users.add(new User("438-9874", "123pw456", "Lawrence", "lawrence@email.com", "213-234-2459", false));
     }
 
     public void displayBooks() {
@@ -66,7 +105,6 @@ public class BibliotecaApp {
 
     public String enterTitle() {
         System.out.println("Please enter name of item to checkin or checkout.");
-        Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
     }
 
@@ -150,15 +188,6 @@ public class BibliotecaApp {
         System.out.println("That is not a valid movie to return.");
     }
 
-    public void populateUsers() {
-        users.add(new User("343-5421", "itsmemolly", "Molly", "molly@email.com", "213-234-9876", false));
-        users.add(new User("786-9032", "librarian23", "Issa", "issa@biblioteca.com", "213-234-8765", true));
-        users.add(new User("876-1029", "my1stpsword", "Kelly", "kelly@email.com", "213-234-2390", false));
-        users.add(new User("387-2903", "password2day", "Tiffany", "tiffany@email.com", "213-234-2109", false));
-        users.add(new User("587-1209", "nvrchangeit", "Daniel", "daniel@bibilioteca.com", "213-234-7834", true));
-        users.add(new User("438-9874", "123pw456", "Lawrence", "lawrence@email.com", "213-234-2459", false));
-    }
-
     public void displayMenu(){
         System.out.println("1 - List of Books");
         System.out.println("2 - Check out a book");
@@ -166,12 +195,12 @@ public class BibliotecaApp {
         System.out.println("4 - List of Movies");
         System.out.println("5 - Check out a movie");
         System.out.println("6 - Check in a movie");
+        System.out.println("7 - View your information");
         System.out.println("0 - Exit");
         System.out.println();
     }
 
     public void inputForMenu() {
-        Scanner scanner = new Scanner(System.in);
 
         while (true) {
             System.out.println("Please select an option");
@@ -199,6 +228,9 @@ public class BibliotecaApp {
                 case 6:
                     String returnMovieName = app.enterTitle();
                     app.checkinMovie(returnMovieName);
+                    break;
+                case 7:
+                    app.viewInfo();
                     break;
                 case 0:
                     exit(0);
