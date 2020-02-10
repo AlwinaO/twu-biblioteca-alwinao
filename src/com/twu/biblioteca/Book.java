@@ -1,13 +1,10 @@
 package com.twu.biblioteca;
 
 
-public class Book {
+public class Book extends Item{
 
-    private String name;
     private String author;
-    private int year;
-//    add boolean value to check if book is available
-    private boolean available;
+
 
     public Book() {
     }
@@ -43,22 +40,12 @@ public class Book {
         this.year = year;
     }
 
-    public void checkout() {
-        this.available = false;
-    }
 
-    public boolean isAvailable() {
-        return available;
-    }
-
-    public void checkin() {
-        this.available = true;
-    }
 
     @Override
     public String toString() {
-        return ("Book: "+ this.getName() + ", " +
-                " Author: "+ this.getAuthor() + ", " +
+        return ("Book: "+ this.getName() + " | " +
+                " Author: "+ this.getAuthor() + " | " +
                 " Year: " + this.getYear());
     }
 
