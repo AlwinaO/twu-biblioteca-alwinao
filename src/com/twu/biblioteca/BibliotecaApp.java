@@ -38,10 +38,12 @@ public class BibliotecaApp {
                     app.displayBooks();
                     break;
                 case 2:
-                    app.enterTitle();
+                    String name = app.enterTitle();
+                    app.checkoutBook(name);
                     break;
                 case 3:
-                    app.checkinBook();
+                    String returnBookName = app.enterTitle();
+                    app.checkinBook(returnBookName);
                     break;
                 case 0:
                     exit(0);
@@ -84,12 +86,11 @@ public class BibliotecaApp {
         books.add(wizardOfOz);
     }
 
-    public void enterTitle() {
-        System.out.println("Please enter name of book to check out a book");
+    public String enterTitle() {
+        System.out.println("Please enter name of book to checkin or checkout a book");
         Scanner scanner = new Scanner(System.in);
         String  name = scanner.nextLine();
-
-        checkoutBook(name);
+        return name;
     }
 
     public void checkoutBook(String name) {
@@ -98,30 +99,42 @@ public class BibliotecaApp {
                 System.out.println("Checking out: " + book.getName());
                 book.checkout();
                 System.out.println("Thank you! Enjoy the book.");
-            }
-            else if (book.getName().equals(name) && !book.isAvailable()){
-                System.out.println("Sorry " + book.getName() +" is not available.");
-
+                return;
             }
         }
+        System.out.println("Sorry " + name + " is not available.");
     }
 
-    public void checkinBook() {
+    public void checkinBook(String name) {
         for (Book book : books) {
-            System.out.println("What book would you like to return? ");
-            Scanner scanner = new Scanner(System.in);
-            String  name = scanner.nextLine();
-
-            if (book.getName().equalsIgnoreCase(name) && !book.isAvailable())
+            if(book.getName().equalsIgnoreCase(name) && !book.isAvailable()){
                 System.out.println("Checking in: " + book.getName());
                 book.checkin();
-//                System.out.println("Thank you for returning the book.");
-//            else if (book.getName().equals(name) && !book.isAvailable()){
-//                System.out.println("Sorry " + book.getName() +" is not available.");
-//
-//            }
+                System.out.println("Thank you! Enjoy the book.");
+                return;
+            }
         }
+        System.out.println("That is not a valid book to return.");
     }
+
+//    public void checkinBook() {
+//        System.out.println("What book would you like to return? ");
+//        Scanner scanner = new Scanner(System.in);
+//        String name = scanner.nextLine();
+//
+//        for (Book book : books) {
+//
+//            if (book.getName().equalsIgnoreCase(name) && !book.isAvailable()) {
+//                System.out.println("Checking in: " + book.getName());
+//                book.checkin();
+//                System.out.println("Thank you for returning the book.");
+//                return;
+//            }
+//            else
+//                System.out.println("Sorry " + book.getName() + " is not available.");
+//        }
+//    }
+
 
     public void addBook() {
 
