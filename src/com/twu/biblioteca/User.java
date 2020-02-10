@@ -42,8 +42,8 @@ public class User {
         return librarian;
     }
 
-    @Override
-    public String toString() {
+
+    public String getInfo() {
         return ("Name: "+ this.getName() + " | " +
                 " Email: "+ this.getEmail() + " | " +
                 " Phone Number: " + this.getPhoneNumber());
